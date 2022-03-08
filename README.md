@@ -1,6 +1,6 @@
-# Title
+# RNA-seq and differential expression 2022-03
 
-RNA-seq and differential expression
+The scripts in this project are for calculating differential expression of RNA sequencing. 
 
 ## Install
 
@@ -25,6 +25,11 @@ htseq-feature-count.sh produces a csv of feature/gene counts based on the hisat2
 ## Contributing
 
 Harry Pollitt, Rebekah White
+
+## Acknowledgement
+
+The authors would like to acknowledge the use of the University of Exeter High-Performance Computing (HPC) facility in
+in carrying out this work.
 
 ## License
 
