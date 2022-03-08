@@ -5,7 +5,9 @@ RNA-seq and differential expression
 ## Install
 
 Tools used in this project:
+
 HISAT2/2.0.4-foss-2016b
+
 HTSeq/0.9.1-foss-2016b-Python-2.7.12
 
 ## Usage
