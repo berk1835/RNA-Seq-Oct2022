@@ -1,26 +1,43 @@
 # RNA-seq and differential expression 2022-03
 
-The scripts in this project are for calculating differential expression of RNA sequencing. 
+Bash scripts to generate commands to submit to a slurm job scheduler for high-throughput differential gene expression analysis.
 
 ## Install
 
 Tools used in this project:
 
-HISAT2/2.0.4-foss-2016b
-
-HTSeq/0.9.1-foss-2016b-Python-2.7.12
+BWA
+BEDTools
+SAMtools
+HISAT2
+STAR
 
 ## Usage
 
-ALL scripts are to be submitted as jobs using "sbatch script.sh"
+--- Creating Index files for alignments ---
+sh hisat-star-indexing.sh
+This only needs to be done once for each reference genome, reuse for each alignment.
 
-Check allocation of threads, time and node before submitting
+--- Aligning rRNA reads ---
+sh generate-bwa-rRNA-commands.sh
+sbatch bwa-rRNA-job-script.sh
 
-hisat2-index.sh should be used first as alignment requires an indexed reference genome
- 
-hisat2-alignment.sh aligns all paired fastq sequence reads in a directory to the reference genome indexed previously
+--- Converting non-rRNA bams to fastqs ---
+sh generate-bamtofastq-commands.sh
+sbatch bamtofastq-job-script.sh
 
-htseq-feature-count.sh produces a csv of feature/gene counts based on the hisat2 alignments
+--- Align filtered reads to genome with HISAT2 ---
+
+sh generate-hisat2-commands.sh
+sbatch hisat2-job-script.sh
+
+--- Align filered reads to genome with STAR ---
+sh generate-star-commands.sh
+sbatch star-job-script.sh
+
+--- featureCounts and DESeq2 in RStudio ---
+deseq2-edgeR-protocol.R 
+This is not automated, change code as necessary.
 
 ## Contributing
 
@@ -30,7 +47,3 @@ Harry Pollitt, Rebekah White
 
 The authors would like to acknowledge the use of the University of Exeter High-Performance Computing (HPC) facility in
 in carrying out this work.
-
-## License
-
-CC BY-ND
