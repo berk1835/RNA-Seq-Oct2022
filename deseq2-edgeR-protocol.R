@@ -84,8 +84,8 @@ plotDispEsts(dds)
 # Exploring significantly differentially expressed genes ----------------------
 
 # Only keep genes with padj below threshold
-sigs <- sigs[sigs$padj < 0.1]
-ordered_sigs <- sigs[order(sigs$padj),]
+deseq_sigs <- sigs[sigs$padj < 0.1]
+deseq_ordered_sigs <- sigs[order(sigs$padj),]
    
 # EdgeR -----------------------------------------------------------------------
 
@@ -93,26 +93,30 @@ d <- DGEList(counts=counts_df, group=factor(condition))
 design <- model.matrix(~batch + condition)
 rownames(design) <- colnames(counts_df)
 
-
 d <- calcNormFactors(d)
 
+# Estimate dispersion
 d <- estimateGLMCommonDisp(d, design, verbose=TRUE)
 d <- estimateGLMTrendedDisp(d, design)
 d <- estimateGLMTagwiseDisp(d, design)
 
+# Explore results
 plotBCV(d)
 plotMDS(d, gene.selection="common")
 plotMDS(d, col=rep(1:2, each=4))
 
+# Fit to glm 
 fit <- glmFit(d, design)
 lrt <- glmLRT(fit, coef=2:3)
 topTags(lrt)
+
+# Adjust p value for multiple testing
 FDR <- p.adjust(lrt$table$PValue, method="BH")
 sum(FDR < 0.05)
 
+# Look at results
 lrt <- glmLRT(fit)
 topTags(lrt)
-
 
 top <- rownames(topTags(lrt))
 cpm(d)[top,]
@@ -125,17 +129,12 @@ DEnames <- rownames(d)[isDE]
 plotSmear(lrt, de.tags=DEnames)
 abline(h=c(-1,1), col="blue")
 
-deg <- topTags(lrt, n = Inf, p = 0.05)$table
+edgeR-deg <- topTags(lrt, n = Inf, p = 0.05)$table
 up <- row.names(deg[deg$logFC > 0,])
 down <- row.names(deg[deg$logFC < 0,])
 
-
-edgeR_DESeq2_matches <- deg[hisat2.edgr.deg$X,]
-edgeR_DESeq2_matches <- hisat2.edgr.deg[rownames(deg),]
-edgeR_DESeq2_matches <- na.omit(edgeR_DESeq2_matches)
-
-
-matches <- hisat2.edgr.deg$X[match(rownames(deg), hisat2.edgr.deg$X, nys_diff_expr_genes_B6_removed$X)]
+# look for matches in gene lists from DESeq2 and EdgeR ------------------------
+matches <- deseq_ordered_sigs[match(rownames(edgeR-deg), deseq_ordered_sigs)]
 matches <- na.omit(matches)
 
 de <- as.data.frame(DEnames)

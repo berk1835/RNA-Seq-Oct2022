@@ -6,6 +6,8 @@ Bash scripts to generate commands to submit to a slurm job scheduler for high-th
 
 Tools used in this project:
 
+Cufflinks - gffread
+
 BWA
 
 BEDTools
@@ -18,12 +20,14 @@ STAR
 
 ## Usage
 
+Check each script and change the #SBATCH parameters and other lines as necessary.
+
 --- Creating Index files for alignments ---
 
 ```bash
 sh hisat-star-indexing.sh
 ```
-This only needs to be done once for each reference genome, reuse for each alignment.
+This only needs to be done once for each reference genome, reuse the index for each alignment.
 
 --- Aligning rRNA reads ---
 
