@@ -19,33 +19,43 @@ STAR
 ## Usage
 
 --- Creating Index files for alignments ---
-```sh hisat-star-indexing.sh```
 
+```bash
+sh hisat-star-indexing.sh
+```
 This only needs to be done once for each reference genome, reuse for each alignment.
 
 --- Aligning rRNA reads ---
-```sh generate-bwa-rRNA-commands.sh
 
-sbatch bwa-rRNA-job-script.sh```
+``bash
+sh generate-bwa-rRNA-commands.sh
+sbatch bwa-rRNA-job-script.sh
+```
 
 --- Converting non-rRNA bams to fastqs ---
-```sh generate-bamtofastq-commands.sh
 
-sbatch bamtofastq-job-script.sh```
+```bash
+sh generate-bamtofastq-commands.sh
+sbatch bamtofastq-job-script.sh
+```
 
 --- Align filtered reads to genome with HISAT2 ---
 
-```sh generate-hisat2-commands.sh
-
-sbatch hisat2-job-script.sh```
+```bash
+sh generate-hisat2-commands.sh
+sbatch hisat2-job-script.sh
+```
 
 --- Align filered reads to genome with STAR ---
-```sh generate-star-commands.sh
 
-sbatch star-job-script.sh```
+```bash
+sh generate-star-commands.sh
+sbatch star-job-script.sh
+```
 
 --- featureCounts and DESeq2 in RStudio ---
-```deseq2-edgeR-protocol.R```
+
+`deseq2-edgeR-protocol.R`
 
 This is not automated, change code as necessary.
 
