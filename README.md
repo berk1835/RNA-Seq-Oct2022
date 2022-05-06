@@ -27,7 +27,7 @@ This only needs to be done once for each reference genome, reuse for each alignm
 
 --- Aligning rRNA reads ---
 
-``bash
+```bash
 sh generate-bwa-rRNA-commands.sh
 sbatch bwa-rRNA-job-script.sh
 ```
