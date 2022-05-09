@@ -13,7 +13,7 @@
 #                                                                              #
 #                                                                              #
 # To use, copy or symbolic link this script into the directory where your      #
-# rRNA aligned BAM files are. This should be nested within the fastq directory.#
+# rRNA aligned BAM files are. Fastq files will be stored in a sub-directory.   #
 # From inside that directory run the script:                                   #
 #                                                                              #
 # sh generate-bamtofastq-commands.sh                                           #
@@ -42,6 +42,16 @@ cat <<\EOF > bamtofastq-job-script.sh
 module load BEDTools/2.27.1-foss-2016b 
 module load SAMtools/1.5-foss-2016b
 EOF
+
+###################################################################################
+# 
+# Loop to generate commands to convert rRNA aligned bam to fastqs of non-rRNA reads
+#
+###################################################################################
+
+# samtools view options
+# -f 4 # unmapped reads
+# -F 4 # mapped reads
 
 for fname in ./*Ppa*_rRNA_alignment.bam
 do

@@ -45,10 +45,16 @@ module load STAR/2.7.3a-foss-2018b
 ref=/lustre/projects/Research_Project-T110796/el_paco_ref/STAR_Index/
 EOF
 
+################################################################################
+# 
+# Loop to generate commands to align reads to reference with STAR
+#
+################################################################################
+
 for fname in ../fastqs/*Ppa*_R1.fastq
 do
     sample=${fname%_R1*}
-    output=$(echo $sample | cut -d '/' -f 3)
+    output=$(echo $sample | cut -d '/' -f 3)_star_
     printf "STAR --runThreadN 8 --genomeDir \$ref --readFilesIn "${sample}_R1.fastq" "${sample}_R2.fastq" --outSAMtype BAM SortedByCoordinate --outFileNamePrefix $output\n" >> star-job-script.sh
 
 done
