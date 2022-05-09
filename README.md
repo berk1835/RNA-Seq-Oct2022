@@ -25,7 +25,8 @@ Check each script and change the #SBATCH parameters and other lines as necessary
 --- Creating Index files for alignments ---
 
 ```bash
-sh hisat-star-indexing.sh
+sbatch hisat-indexing-job.sh
+sbatch star-indexing-job.sh
 ```
 This only needs to be done once for each reference genome, reuse the index for each alignment.
 
