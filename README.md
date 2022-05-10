@@ -57,6 +57,7 @@ git fetch origin  # should download updated scripts if needed
 Once you have made the directory tree and linked the fastq directory, it should look something like this.
 * is the symbolically linked directory
 
+```bash
 .
 └── Research_Project-T110796/
     ├── nys_project/
@@ -79,7 +80,7 @@ Once you have made the directory tree and linked the fastq directory, it should 
     │   └── HISAT_Index
     └── diff_expr_scripts/
         └── here be scripts...
-
+```
 
 ## Script Usage
 
