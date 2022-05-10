@@ -1,6 +1,6 @@
 # RNA-seq and differential expression 2022-03
 
-Bash scripts to generate commands to submit to a slurm job scheduler for high-throughput differential gene expression analysis.
+Bash scripts to generate commands to submitted via slurm job scheduler for high-throughput differential gene expression analysis.
 
 ## Tools Used
 
@@ -18,7 +18,9 @@ STAR
 
 ## Project Setup
 
-Move to your Research_Project directory
+Perform initial setup for project directories and files to make subsequent filtering and alignment run smoother.
+
+Move to your Research_Project directory.
 
 ```bash
 cd /lustre/projects/Research_Project-T110796
@@ -49,7 +51,7 @@ To obtain the scripts from the GitHub repository first move to diff_expr_scripts
 ```bash
 git clone https://github.com/Harry-Pollitt/RNA-Seq-Projects.git . # . is current working directory 
 
-git fetch origin  # should download updated scripts if needed
+git pull origin  # should download updated scripts if needed
 ```
 
 
@@ -129,11 +131,17 @@ deseq2-edgeR-protocol.R
 ```
 
 To use this R script you will need to download your HISAT2/STAR aligned bam files and place them into your working directory for RStudio.
-The load this script and work through each step. Modifying the script to your needs. 
+Then load this script and work through each step. Modifying the script to your needs. 
 
 ## Contributing
 
-Harry Pollitt, Rebekah White
+Harry Pollitt 
+
+Email: hap39@aber.ac.uk
+
+Rebekah White 
+
+Email: rw617@exeter.ac.uk
 
 ## Acknowledgement
 
