@@ -2,9 +2,7 @@
 
 Bash scripts to generate commands to submit to a slurm job scheduler for high-throughput differential gene expression analysis.
 
-## Install
-
-Tools used in this project:
+## Tools Used
 
 Cufflinks - gffread
 
@@ -18,7 +16,72 @@ HISAT2
 
 STAR
 
-## Usage
+## Project Setup
+
+Move to your Research_Project directory
+
+```bash
+cd /lustre/projects/Research_Project-T110796
+```
+
+Make a directory tree that is compatible with job generation and job scripts. First you will need to rename the 
+main project directory after your project.
+This next command will make almost the entire tree. The -m 770 option will add full directory permissions to owner and group users.
+
+```bash
+mkdir -m 770 -p nys_RNA_seq/rRNA_filtering/rRNA_filtered_reads/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
+```
+
+To make scripts look cleaner it is useful to link files that are stored else where into the projecta analysis directory.
+This is called a symbolic link. To link to the fastp_trimmed directory that contains the trimmed fastq files received 
+from the sequencing centre use this command. Change the directory names as required. I ran this from the Research_Project-T110796 directory.
+
+```bash
+ln -s ./nys_project/Project_10558/V0210/11_fastp_trimmed/ ./nys_RNA_seq/fastqs
+``` 
+
+The reference genome for *Pristionchus pacificus* should already be in the el_paco_ref directory. If a new version is released upload them
+into this directory. You will then need to index the new version for HISAT2 or STAR using the scripts provided.
+
+### Downloading Scripts 
+To obtain the scripts from the GitHub repository first move to diff_expr_scripts/ then load the git module and use the following command.
+
+```bash
+git clone https://github.com/Harry-Pollitt/RNA-Seq-Projects.git . # . is current working directory 
+
+git fetch origin  # should download updated scripts if needed
+```
+
+
+
+Once you have made the directory tree and linked the fastq directory, it should look something like this.
+* is the symbolically linked directory
+
+.
+└── Research_Project-T110796/
+    ├── nys_project/
+    │   └── Project_10558/
+    │       └── V0210/
+    │           ├── 01_raw_reads
+    │           ├── 09_QC_reports
+    │           └── 11_fastp_trimmed*
+    ├── nys_alignments/
+    │   ├── fastqs*
+    │   └── rRNA_filtering/
+    │       ├── filtered_fastqs
+    │       ├── STAR_alignment
+    │       └── HISAT2_alignment
+    ├── el_paco_ref/
+    │   ├── El_Paco_V3_gene_annotations.gff3
+    │   ├── El_Paco_genome.fa 
+    │   ├── El_Paco_V3_gene_annotations.gtf 
+    │   ├── STAR_Index
+    │   └── HISAT_Index
+    └── diff_expr_scripts/
+        └── here be scripts...
+
+
+## Script Usage
 
 Check each script and change the #SBATCH parameters and other lines as necessary.
 
@@ -60,9 +123,12 @@ sbatch star-job-script.sh
 
 --- featureCounts and DESeq2 in RStudio ---
 
-`deseq2-edgeR-protocol.R`
+```bash
+deseq2-edgeR-protocol.R
+```
 
-This is not automated, change code as necessary.
+To use this R script you will need to download your HISAT2/STAR aligned bam files and place them into your working directory for RStudio.
+The load this script and work through each step. Modifying the script to your needs. 
 
 ## Contributing
 
