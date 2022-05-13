@@ -29,7 +29,7 @@ module load STAR/2.7.3a-foss-2018b
 # make the output directory (genomeDir) first
 # run STAR in index mode
 # needs the reference fasta and annotation in gtf format
-STAR --runThread 8 --runMode genomeGenerate --genomeDir ./STAR-Index \
+STAR --runThread 8 --runMode genomeGenerate --genomeDir ./STAR_Index \
 --genomeFastaFiles El_Paco_genome.fa \
 --sjdbGTFfile El_Paco_V3_gene_annotations.gtf 
 

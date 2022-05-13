@@ -56,5 +56,5 @@ EOF
 for fname in ./*Ppa*_rRNA_alignment.bam
 do
     SAMPLE=${fname%_rRNA*}
-        printf "samtools view -@ 8 -b -f 4 "${SAMPLE}_rRNA_alignment.bam" | bedtools bamtofastq -i - -fq "./fastqs/${SAMPLE}_filtered_R1.fastq" -fq2 "./fastqs/${SAMPLE}_filtered_R2.fastq" \n" >> bamtofastq-job-script.sh
+        printf "samtools view -@ 8 -b -f 4 "${SAMPLE}_rRNA_alignment.bam" | bedtools bamtofastq -i - -fq "./filtered_fastqs/${SAMPLE}_filtered_R1.fastq" -fq2 "./filtered_fastqs/${SAMPLE}_filtered_R2.fastq" \n" >> bamtofastq-job-script.sh
 done

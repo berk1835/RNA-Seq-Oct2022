@@ -31,10 +31,10 @@ main project directory after your project.
 This next command will make almost the entire tree. The -m 770 option will add full directory permissions to owner and group users.
 
 ```bash
-mkdir -m 770 -p nys_RNA_seq/rRNA_filtering/rRNA_filtered_reads/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
+mkdir -m 770 -p nys_RNA_seq/rRNA_filtering/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
 ```
 
-To make scripts look cleaner it is useful to link files that are stored else where into the projecta analysis directory.
+To make scripts look cleaner it is useful to link files that are stored else where into the project analysis directory.
 This is called a symbolic link. To link to the fastp_trimmed directory that contains the trimmed fastq files received 
 from the sequencing centre use this command. Change the directory names as required. I ran this from the Research_Project-T110796 directory.
 
@@ -130,7 +130,7 @@ sbatch star-job-script.sh
 deseq2-edgeR-protocol.R
 ```
 
-To use this R script you will need to download your HISAT2/STAR aligned bam files and place them into your working directory for RStudio.
+To use this R script you will need to download your HISAT2/STAR aligned bam files and the gtf annotation file and place them into your working directory for RStudio.
 Then load this script and work through each step. Modifying the script to your needs. 
 
 ## Contributing
@@ -142,6 +142,10 @@ Email: hap39@aber.ac.uk
 Rebekah White 
 
 Email: rw617@exeter.ac.uk
+
+Cameron Weadick
+
+Email: 
 
 ## Acknowledgement
 

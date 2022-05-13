@@ -84,6 +84,7 @@ plotDispEsts(dds)
 # Exploring significantly differentially expressed genes ----------------------
 
 # Only keep genes with padj below threshold
+sigs <- na.omit(res)
 deseq_sigs <- sigs[sigs$padj < 0.1]
 deseq_ordered_sigs <- sigs[order(sigs$padj),]
    

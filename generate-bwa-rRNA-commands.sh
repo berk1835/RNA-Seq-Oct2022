@@ -52,7 +52,7 @@ EOF
 #
 ################################################################################
 
-for fname in ../nys_fastqs/*Ppa*_R1_001_fastp.fastq.gz
+for fname in ../fastqs/*Ppa*_R1_001_fastp.fastq.gz
 do
     SAMPLE=${fname%_R1*}
     OUTPUT=$(echo $SAMPLE | cut -d '/' -f 3)
