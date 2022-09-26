@@ -27,7 +27,7 @@ cd /lustre/projects/Research_Project-T110796
 ```
 
 
-## Download seq data in new subproject folder
+### Download seq data in new subproject folder
 ```bash
 # Create new folder and move into folder
 mkdir Project_10762
@@ -44,7 +44,6 @@ curl URL.tar | tar -xv
 ```
 
 
-## New directory tree
 Make a directory tree that is compatible with job generation and job scripts. First you will need to rename the 
 main project directory after your project.
 This next command will make almost the entire tree. The -m 770 option will add full directory permissions to owner and group users.
