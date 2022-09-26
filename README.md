@@ -49,7 +49,7 @@ main project directory after your project.
 This next command will make almost the entire tree. The -m 770 option will add full directory permissions to owner and group users.
 
 ```bash
-mkdir -m 770 -p nys_RNA_seq/rRNA_filtering/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
+mkdir -m 770 -p OCT22_RNA_seq/rRNA_filtering/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
 ```
 
 To make scripts look cleaner it is useful to link files that are stored else where into the project analysis directory.
@@ -57,7 +57,7 @@ This is called a symbolic link. To link to the fastp_trimmed directory that cont
 from the sequencing centre use this command. Change the directory names as required. I ran this from the Research_Project-T110796 directory.
 
 ```bash
-ln -s ./nys_project/Project_10558/V0210/11_fastp_trimmed/ ./nys_RNA_seq/fastqs
+ln -s ./Project_10762/V0268/11_fastp_trimmed/ ./OCT22_RNA_seq/fastqs
 ``` 
 
 The reference genome for *Pristionchus pacificus* should already be in the el_paco_ref directory. If a new version is released upload them
@@ -80,13 +80,12 @@ Once you have made the directory tree and linked the fastq directory, it should 
 ```bash
 .
 └── Research_Project-T110796/
-    ├── nys_project/
-    │   └── Project_10558/
+    ├── Project_10762/
     │       └── V0210/
     │           ├── 01_raw_reads
     │           ├── 09_QC_reports
     │           └── 11_fastp_trimmed*
-    ├── nys_alignments/
+    ├── ages_alignments/
     │   ├── fastqs*
     │   └── rRNA_filtering/
     │       ├── filtered_fastqs
