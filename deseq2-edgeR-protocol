@@ -2,6 +2,7 @@
 # Rsubread/featureCounts and DESeq2
 # Author: Harry Pollitt
 # Email: hap39@aber.ac.uk / hp508@exeter.ac.uk
+# Updated for project-specific requirements 26/09/2022 Rebekah White
 
 
 
@@ -23,45 +24,69 @@ sample_names <- list.files(pattern= "*.bam")
 samples <- strsplit(sample_names, "_")
 samples <- sapply(samples, '[', 2)
 
+# add study_id to each sample
+studies <- factor(c("PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", "PpaAge", 
+			"2hNys", "2hNys", "2hNys", "2hNys", "2hNys", "2hNys", "2hNys", "2hNys", 
+			"Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8", "Ppa_only_1:8"))
+
+
 # factors - order needs to match sample_names order
-condition <- factor(c("Ctrl","Ctrl","Nys","Nys","Ctrl","Ctrl","Nys","Nys","Ctrl","Nys"))
-batch <- factor(c("8","8","8","8","5","5","5","5","6","6" ))
+condition <- factor(c("J4+12","J4+12","J4+6","J4+6","J4+3","J4+3","J4+3","J4+6","J4+12","J4+3", "J4+6", "J4+12",
+			"ctr", "ctr", "ctr", "2hnys", "2hnys", "2hnys", "ctr", "2hnys",
+			"ctrl", "eight", "ctrl", "eight", "ctrl", "eight", "ctrl", "eight", "ctrl", "eight"))
+			
+batch <- factor(c("1","1","1","1","1","1","3","3","3","4", "4", "4",
+			"1","1","1","1","1","1", "2", "2", 
+			"1", "1", "2", "2", "3", "3", "4", "4", "5", "5")) 
+
 
 # Combine into table
-metadata <- data.frame(row.names = samples, sample_names, condition, batch)
+metadata <- data.frame(row.names = studies, samples, sample_names, condition, batch)
 
 
+# Subset data for each study
+metadata_ages <-  subset(metadata, studies == "PpaAge",
+                select=c(studies, samples, sample_names, condition, batch))
+
+metadata_2hNys <-  subset(metadata, studies == "2hNys",
+                select=c(studies, samples, sample_names, condition, batch))
+
+metadata_1:8 <-  subset(metadata, studies == "Ppa_only_1:8",
+                select=c(studies, samples, sample_names, condition, batch))
+
+
+##### PPA AGES
 
 # Run featureCounts from Rsubread ---------------------------------------------
 
-counts <- featureCounts(files=metadata$sample_names,  annot.ext = "El_Paco_V3_gene_annotations.gtf",
+counts <- featureCounts(files=metadata_ages$sample_names,  annot.ext = "El_Paco_V3_gene_annotations.gtf",
                         isGTFAnnotationFile = TRUE, GTF.featureType = "exon", GTF.attrType = "transcript_id",
                         isPairedEnd = TRUE, minFragLength = 50, maxFragLength = 600, strandSpecific = 2)
 						
 # Ready table for use by DESeq2 and remove features with no reads
-raw_counts_df <- as.data.frame(counts$counts)
-counts_df <- raw_counts_df[which(rowSums(raw_counts_df) > 0),]
+raw_counts_df_ages <- as.data.frame(counts$counts)
+counts_df_ages <- raw_counts_df_ages[which(rowSums(raw_counts_df) > 0),]
 
 
 
 # Running DESeq2 --------------------------------------------------------------
 
 # create DESeq2 object
-dds <- DESeqDataSetFromMatrix(countData=counts_df, colData = metadata, design = ~ batch + condition)
+dds_ages <- DESeqDataSetFromMatrix(countData=counts_df_ages, colData = metadata_ages, design = ~ batch + condition)
 
 # run DESeq2 
-dds <- DESeq(dds) 
+dds_ages <- DESeq(dds_ages) 
 
 # obtaining results
-resultsNames(dds)  # will tell you coef or contrast names if needed
-res <- results(dds, contrast=c("condition", "Nys", "Ctrl")
+resultsNames(dds_ages)  # will tell you coef or contrast names if needed
+res <- results(dds_ages, contrast=c("condition", "J4+12", "J4+6", "J4+3")
 
 
 
 # Exploring Quality of DESeq2 results -----------------------------------------
 
 # Log fold change shrinkage
-resLFC <- lfcShrink(dds, coef="condition_Nys_vs_Ctrl", type="apeglm")  # if apeglm doesn't work use "normal" or "ashr"
+resLFC <- lfcShrink(dds_ages, coef="condition_vs", type="apeglm")  # if apeglm doesn't work use "normal" or "ashr"
 
 # View log fold change shrinkage with MAplot 
 plotMA(res, ylim=c(-2,2))
@@ -72,7 +97,7 @@ vsd <- vst(dds, blind=FALSE)
 
 # View vsd as PCA
 pca_norm <- plotPCA(vsd, intgroup="condition")
-pca_norm + geom_label(aes(label = metadata$sample)) +
+pca_norm + geom_label(aes(label = metadata_ages$sample)) +
    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
    panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_y_continuous(expand = c(0.035, 0))
    
