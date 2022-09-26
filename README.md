@@ -81,7 +81,7 @@ Once you have made the directory tree and linked the fastq directory, it should 
 cd /lustre/projects/Research_Project-T110796/Project_10762
 |
 └── Project_10762/
-    ├── V0210/
+    ├── V0268/
     │   ├── 01_raw_reads
     │   ├── 09_QC_reports
     │   └── 11_fastp_trimmed*
@@ -99,6 +99,7 @@ cd /lustre/projects/Research_Project-T110796/Project_10762
     │   ├── El_Paco_V3_gene_annotations.gtf 
     │   ├── STAR_Index
     │   └── HISAT_Index
+    |
     └── diff_expr_scripts/
         └── here be scripts...
 ```
