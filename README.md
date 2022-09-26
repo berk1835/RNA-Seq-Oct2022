@@ -1,4 +1,4 @@
-# RNA-seq and differential expression 2022-03
+# RNA-seq and differential expression 2022-10
 
 Bash scripts to generate commands to submitted via slurm job scheduler for high-throughput differential gene expression analysis.
 
