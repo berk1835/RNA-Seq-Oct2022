@@ -57,7 +57,10 @@ This is called a symbolic link. To link to the fastp_trimmed directory that cont
 from the sequencing centre use this command. Change the directory names as required. I ran this from the Research_Project-T110796 directory.
 
 ```bash
-ln -s ./Project_10762/V0268/11_fastp_trimmed/ ./OCT22_RNA_seq/fastqs
+ln -s /lustre/projects/Research_Project-T110796/Project_10762/V0268/11_fastp_trimmed/ /lustre/projects/Research_Project-T110796/Project_10762/ages_alignments/fastqs
+
+/lustre/projects/Research_Project-T110796/Project_10762/ages_alignments
+
 ``` 
 
 The reference genome for *Pristionchus pacificus* should already be in the el_paco_ref directory. If a new version is released upload them
