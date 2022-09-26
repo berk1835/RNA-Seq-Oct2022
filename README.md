@@ -78,19 +78,21 @@ Once you have made the directory tree and linked the fastq directory, it should 
 * is the symbolically linked directory
 
 ```bash
-.
-└── Research_Project-T110796/
-    ├── Project_10762/
-    │       └── V0210/
-    │           ├── 01_raw_reads
-    │           ├── 09_QC_reports
-    │           └── 11_fastp_trimmed*
+cd /lustre/projects/Research_Project-T110796/Project_10762
+|
+└── Project_10762/
+    ├── V0210/
+    │   ├── 01_raw_reads
+    │   ├── 09_QC_reports
+    │   └── 11_fastp_trimmed*
+    |
     ├── ages_alignments/
     │   ├── fastqs*
     │   └── rRNA_filtering/
     │       ├── filtered_fastqs
     │       ├── STAR_alignment
     │       └── HISAT2_alignment
+    |
     ├── el_paco_ref/
     │   ├── El_Paco_V3_gene_annotations.gff3
     │   ├── El_Paco_genome.fa 
