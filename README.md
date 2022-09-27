@@ -121,6 +121,13 @@ This only needs to be done once for each reference genome, reuse the index for e
 
 --- Aligning rRNA reads ---
 
+# Create absolute symbolic link from diff_expr scripts in filtered_fastqs to run script in this directory
+
+```bash
+ln -s /lustre/projects/Research_Project-T110796/Project_10762/diff_expr_scripts/bwa-rRNA-job-script.sh rRNA-filtering.sh
+```
+In the job creation loop check that all file paths are correct. If in doubt use absolute path.
+
 ```bash
 sh generate-bwa-rRNA-commands.sh
 sbatch bwa-rRNA-job-script.sh
