@@ -1,4 +1,5 @@
-For ```bash sh generate-bwa-rRNA-commands.sh```, you would expect to see:
+For ```sh generate-bwa-rRNA-commands.sh```, you would expect to see:
+
 
 ```bash
 #!/bin/bash
