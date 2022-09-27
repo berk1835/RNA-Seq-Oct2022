@@ -78,7 +78,7 @@ git pull origin  # should download updated scripts if needed
 
 
 Once you have made the directory tree and linked the fastq directory, it should look something like this.
-* is the symbolically linked directory
+'*' is the symbolically linked directory
 
 ```bash
 cd /lustre/projects/Research_Project-T110796/Project_10762
@@ -97,11 +97,12 @@ cd /lustre/projects/Research_Project-T110796/Project_10762
     │       └── HISAT2_alignment
     |
     ├── el_paco_ref/
-    │   ├── El_Paco_V3_gene_annotations.gff3
-    │   ├── El_Paco_genome.fa 
-    │   ├── El_Paco_V3_gene_annotations.gtf 
-    │   ├── STAR_Index
-    │   └── HISAT_Index
+    |   └── el_paco_ref/
+    │       ├── El_Paco_V3_gene_annotations.gff3
+    │       ├── El_Paco_genome.fa 
+    │       ├── El_Paco_V3_gene_annotations.gtf 
+    │       ├── STAR_Index
+    │       └── HISAT_Index
     |
     └── diff_expr_scripts/
         └── here be scripts...
