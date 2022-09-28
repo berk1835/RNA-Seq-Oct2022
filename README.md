@@ -124,7 +124,7 @@ This only needs to be done once for each reference genome, reuse the index for e
 
 --- Aligning rRNA reads ---
 
-### Create absolute symbolic link from diff_expr scripts in filtered_fastqs to run script in this directory
+Create absolute symbolic link from diff_expr scripts in filtered_fastqs to run script in this directory
 
 ```bash
 ln -s /lustre/projects/Research_Project-T110796/Project_10762/diff_expr_scripts/bwa-rRNA-job-script.sh rRNA-filtering.sh
@@ -140,6 +140,8 @@ sbatch bwa-rRNA-job-script.sh
 --- Create the rRNA index ---
 
 ```bash
+cd /lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref//el_paco_ref/
+
 module load BWA/0.7.17-foss-2018a
 module load SAMtools/1.7-foss-2018a
 
