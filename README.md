@@ -89,10 +89,24 @@ cd /lustre/projects/Research_Project-T110796/Project_10762
     ├── V0268/
     │   ├── 01_raw_reads
     │   ├── 09_QC_reports
-    │   └── 11_fastp_trimmed*
+    │   └── 11_fastp_trimmed
     |
     ├── ages_alignments/
-    │   ├── fastqs*
+    │   ├── fastqs
+    │   └── rRNA_filtering/
+    │       ├── filtered_fastqs
+    │       ├── STAR_alignment
+    │       └── HISAT2_alignment
+    |
+    ├── nys2h_alignments/
+    │   ├── fastqs
+    │   └── rRNA_filtering/
+    │       ├── filtered_fastqs
+    │       ├── STAR_alignment
+    │       └── HISAT2_alignment
+    |
+    ├── dr_alignments/
+    │   ├── fastqs
     │   └── rRNA_filtering/
     │       ├── filtered_fastqs
     │       ├── STAR_alignment
