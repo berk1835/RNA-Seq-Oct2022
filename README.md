@@ -66,6 +66,16 @@ ln -s /lustre/projects/Research_Project-T110796/Project_10762/V0268/11_fastp_tri
 The reference genome for *Pristionchus pacificus* should already be in the el_paco_ref directory. If a new version is released upload them
 into this directory. You will then need to index the new version for HISAT2 or STAR using the scripts provided.
 
+--- Create the rRNA index ---
+
+```bash
+module load BWA/0.7.17-foss-2018a
+module load SAMtools/1.7-foss-2018a
+
+bwa index rRNA-reference.fasta
+```
+
+
 ### Downloading Scripts 
 To obtain the scripts from the GitHub repository first move to diff_expr_scripts/ then load the git module and use the following command.
 
