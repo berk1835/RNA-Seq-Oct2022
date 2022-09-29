@@ -139,7 +139,7 @@ This only needs to be done once for each reference genome, reuse the index for e
 --- Create the rRNA index ---
 
 ```bash
-cd /lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref//el_paco_ref/
+cd /lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref/el_paco_ref/
 
 module load BWA/0.7.17-foss-2018a
 module load SAMtools/1.7-foss-2018a
