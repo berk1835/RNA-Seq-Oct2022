@@ -16,7 +16,7 @@
 # BAM files will go. This should be nested within the fastq directory.         #
 # From inside that directory run the script:                                   #
 #                                                                              #
-# sh generate-bwa-rRNA-commands.sh                                             #
+# sh generate-bwa-rRNA-commands-SAM.sh                                         #
 #                                                                              #
 # This will create a job script containing all the bwa commands ready to       #
 # submit to the queue.                                                         #
@@ -24,14 +24,14 @@
 ################################################################################
 
 
-cat <<\EOF > bwa-rRNA-job-script.sh
+cat <<\EOF > bwa-rRNA-job-script-SAM.sh
 #!/bin/bash
 #SBATCH --export=ALL # export all environment variables to the batch job
 #SBATCH -D . # set working directory
 #SBATCH -p pq # submit to the parallel queue
-#SBATCH --time=03:00:00 # maximum walltime for the job
+#SBATCH --time=10:00:00 # maximum walltime for the job
 #SBATCH -A Research_Project-T110796 # research project to submit under
-#SBATCH --nodes=1 # specify number of nodes
+#SBATCH --nodes=2 # specify number of nodes
 #SBATCH --ntasks-per-node=8 # specify number of processors per node
 #SBATCH --mem=30G # specify bytes memory to reserve
 #SBATCH --mail-type=END # send email at job completion
@@ -49,7 +49,7 @@ EOF
 
 ################################################################################
 #
-# Loop to generate commands to align reads to the rRNA reference fasta
+# Loop to generate commands to align reads to the rRNA reference fasta and output in SAM format
 #
 ################################################################################
 
