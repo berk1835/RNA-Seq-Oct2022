@@ -29,15 +29,15 @@ cat <<\EOF > bwa-rRNA-job-script-BAM.sh
 #SBATCH --export=ALL # export all environment variables to the batch job
 #SBATCH -D . # set working directory
 #SBATCH -p pq # submit to the parallel queue
-#SBATCH --time=03:00:00 # maximum walltime for the job
+#SBATCH --time=10:00:00 # maximum walltime for the job
 #SBATCH -A Research_Project-T110796 # research project to submit under
-#SBATCH --nodes=1 # specify number of nodes
+#SBATCH --nodes=2 # specify number of nodes
 #SBATCH --ntasks-per-node=8 # specify number of processors per node
 #SBATCH --mem=30G # specify bytes memory to reserve
 #SBATCH --mail-type=END # send email at job completion
-#SBATCH --mail-user=hp508@exeter.ac.uk # email address
+#SBATCH --mail-user=EMAIL@EMAIL.com # email address
 
-# Commands you wish to run must go here, after the SLURM directives]
+# Commands you wish to run must go here, after the SLURM directives
 # load the modules required by the job
 module load BWA/0.7.17-foss-2018a
 module load SAMtools/1.7-foss-2018a
