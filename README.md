@@ -154,13 +154,19 @@ Create absolute symbolic link from diff_expr scripts in filtered_fastqs to run s
 ```bash
 ln -s /lustre/projects/Research_Project-T110796/Project_10762/diff_expr_scripts/bwa-rRNA-job-script.sh rRNA-filtering.sh
 ```
-In the job creation loop check that all file paths are correct. If in doubt use absolute path.
+Generate SAM files and gzip. In the job creation loop check that all file paths are correct. If in doubt use absolute path.
 
 ```bash
-sh generate-bwa-rRNA-commands.sh
-sbatch bwa-rRNA-job-script.sh
+sh generate-bwa-rRNA-commands-SAM.sh
+sbatch bwa-rRNA-job-script-SAM.sh
 ```
 
+Generate BAM file and gzip.
+
+```bash
+sh generate-bwa-rRNA-commands-BAM.sh
+sbatch bwa-rRNA-job-script-BAM.sh
+```
 
 
 
