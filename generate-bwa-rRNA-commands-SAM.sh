@@ -42,22 +42,24 @@ cat <<\EOF > bwa-rRNA-job-script.sh
 module load BWA/0.7.17-foss-2018a
 module load SAMtools/1.7-foss-2018a
 
+
 # absolute path to reference file
-ref=/lustre/projects/Research_Project-T110796/el_paco_ref/rRNA-reference.fasta
+ref=/lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref/el_paco_ref/rRNA-reference.fasta
 EOF
 
 ################################################################################
-# 
+#
 # Loop to generate commands to align reads to the rRNA reference fasta
 #
 ################################################################################
 
-for fname in ../fastqs/*Ppa*_R1_001_fastp.fastq.gz
+for fname in /lustre/projects/Research_Project-T110796/Project_10762/ages_alignments/fastqs/*_R1_cuta.fastq.gz
 do
     SAMPLE=${fname%_R1*}
     OUTPUT=$(echo $SAMPLE | cut -d '/' -f 3)
-        printf "bwa mem \$ref "${SAMPLE}_R1_001_fastp.fastq.gz" "${SAMPLE}_R2_001_fastp.fastq.gz" | samtools view -b "${OUTPUT}_rRNA_alignment.bam"\n" >> bwa-rRNA-job-script.sh
+        printf "bwa mem /lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref/el_paco_ref/rRNA-reference.fasta  "${SAMPLE}_R1_cuta.fa$
 done
+
 
 
 
