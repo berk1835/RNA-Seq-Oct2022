@@ -35,7 +35,7 @@ cat <<\EOF > bwa-rRNA-job-script-SAM.sh
 #SBATCH --ntasks-per-node=8 # specify number of processors per node
 #SBATCH --mem=30G # specify bytes memory to reserve
 #SBATCH --mail-type=END # send email at job completion
-#SBATCH --mail-user=hp508@exeter.ac.uk # email address
+#SBATCH --mail-user=EMAIL@EMAIL.com # email address
 
 # Commands you wish to run must go here, after the SLURM directives]
 # load the modules required by the job
