@@ -19,7 +19,7 @@
 # rRNA aligned BAM files are. Fastq files will be stored in a sub-directory.   #
 # From inside that directory run the script:                                   #
 #                                                                              #
-# sh sortedbams_job_script.sh                                                  #
+# sh sortedbam_commands.sh                                                     #
 #                                                                              #
 # This will create a job script containing all the SAMTools                    #
 # commands ready to submit to the queue.                                       #
@@ -28,7 +28,7 @@
 
 
 
-cat <<\EOF > sortedbams_job_script.sh
+cat <<\EOF > sortedbam_commands.sh
 #!/bin/bash
 #SBATCH --export=ALL # export all environment variables to the batch job
 #SBATCH -D . # set working directory
@@ -60,7 +60,7 @@ EOF
 for fname in /lustre/projects/Research_Project-T110796/Project_10762/ages_alignments/fastqs/*rRNA_alignment.sam.gz.bam
 do
         SAMPLE=${fname%_rRNA*}
-        printf "samtools sort -n "${SAMPLE}_rRNA_alignment.sam.gz.bam" -o "${SAMPLE}_sorted.bam" | bedtools bamtofastq -i "${SAMPLE}_sorted.bam" -fq "${SAMPLE}_filtered_R1.fastq" -fq2 "${SAMPLE}_filtered_R2.fastq"\n" >> sortedbams_job_script.sh
+        printf "samtools sort -n "${SAMPLE}_rRNA_alignment.sam.gz.bam" -o "${SAMPLE}_sorted.bam" | bedtools bamtofastq -i "${SAMPLE}_sorted.bam" -fq "${SAMPLE}_filtered_R1.fastq" -fq2 "${SAMPLE}_filtered_R2.fastq"\n" >> sortedbam_commands.sh
 
 done
 
