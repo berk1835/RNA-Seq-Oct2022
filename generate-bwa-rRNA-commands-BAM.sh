@@ -58,7 +58,7 @@ for fname in /lustre/projects/Research_Project-T110796/Project_10762/ages_alignm
 do
     SAMPLE=${fname%*_ages_rRNA_alignment}
 
-        printf "samtools view -Sb "${SAMPLE}" > "${SAMPLE}.bam" | gzip > "${SAMPLE}_ages_rRNA_alignment.bam.gz"\n" >> bwa-rRNA-job-script-BAM.sh
+        printf "samtools view -Sb "${SAMPLE}" > "${SAMPLE}.bam"\n" >> bwa-rRNA-job-script-BAM.sh
 
 done
 
