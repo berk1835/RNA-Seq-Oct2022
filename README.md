@@ -93,6 +93,7 @@ cd /lustre/projects/Research_Project-T110796/Project_10762
     |
     ├── ages_alignments/
     │   ├── fastqs
+    |   ├── sorted_bams
     │   └── rRNA_filtering/
     │       ├── filtered_fastqs
     │       ├── STAR_alignment
@@ -173,9 +174,16 @@ sbatch bwa-rRNA-job-script-BAM.sh
 
 --- Converting non-rRNA bams to fastqs ---
 
+
 ```bash
-sh generate-bamtofastq-commands.sh
-sbatch bamtofastq-job-script.sh
+sh generate-sortedbams-commands.sh
+sbatch sortedbams-job-script.sh
+```
+
+
+```bash
+sh generate-sortedbamtofastq-commands.sh
+sbatch sortedbamtofastq-job-script.sh
 ```
 
 --- Align filtered reads to genome with HISAT2 ---
