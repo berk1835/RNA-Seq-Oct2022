@@ -213,15 +213,15 @@ Then load this script and work through each step. Modifying the script to your n
 
 ## Contributing
 
-Harry Pollitt 
+Harry Pollitt (author)
 
 Email: hap39@aber.ac.uk
 
-Rebekah White 
+Rebekah White (October 2022 updates)
 
 Email: rw617@exeter.ac.uk
 
-Cameron Weadick
+Cameron Weadick (PI)
 
 Email: c.weadick@exeter.ac.uk
 
