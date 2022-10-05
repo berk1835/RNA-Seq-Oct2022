@@ -162,7 +162,7 @@ sh generate-bwa-rRNA-commands-SAM.sh
 sbatch bwa-rRNA-job-script-SAM.sh
 ```
 
-Generate BAM file and gzip.
+Generate BAM file.
 
 ```bash
 sh generate-bwa-rRNA-commands-BAM.sh
@@ -174,16 +174,18 @@ sbatch bwa-rRNA-job-script-BAM.sh
 
 --- Converting non-rRNA bams to fastqs ---
 
+Sort .bam files
 
 ```bash
 sh generate-sortedbams-commands.sh
 sbatch sortedbams-job-script.sh
 ```
 
+Subset R1 and R2 into seperate fasta files
 
 ```bash
-sh generate-sortedbamtofastq-commands.sh
-sbatch sortedbamtofastq-job-script.sh
+sh generate-sortedbam_commands.sh
+sbatch sortedbam_commands.sh
 ```
 
 --- Align filtered reads to genome with HISAT2 ---
