@@ -3,7 +3,7 @@
 # Author: Harry Pollitt
 # Email: hap39@aber.ac.uk / hp508@exeter.ac.uk
 # Updated for project-specific requirements 26/09/2022 Rebekah White
-
+# Try vegan NMDS (metaMDS)
 
 
 # load required packages ------------------------------------------------------
