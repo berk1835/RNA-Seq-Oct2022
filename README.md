@@ -1,6 +1,6 @@
-# RNA-seq and differential expression 2022-10
+# RNA-seq and differential expression 2022-11
 
-Bash scripts to generate commands to submitted via slurm job scheduler for high-throughput differential gene expression analysis.
+Bash scripts to generate commands to submitted via slurm job scheduler for high-throughput differential gene expression analysis. For unexpected error messages, check out handycode.txt and handycode2.txt for help.
 
 ## Tools Used
 
@@ -14,7 +14,7 @@ SAMtools
 
 HISAT2
 
-STAR
+MultiQC containing Picard, Preseq, Qualimap, RSeQC, and Samtools alignment metrics.
 
 ## Project Setup
 
@@ -30,45 +30,23 @@ cd /lustre/projects/Research_Project-T110796
 ### Download seq data in new subproject folder
 ```bash
 # Create new folder and move into folder
-mkdir Project_10762
-cd Project_10762
+mkdir nf_10762/fastqs/
+cd nf_10762/fastqs/
 
-# Run V0268 Raw Reads
+# Get QC Files
 curl URL.tar | tar -xv
 
-# Run V0268 QC Files
-curl URL.tar | tar -xv
-
-# Run V0268 Trimmed Reads
+# Get Trimmed Reads
 curl URL.tar | tar -xv
 ```
 
 
-Make a directory tree that is compatible with job generation and job scripts. First you will need to rename the 
-main project directory after your project.
-This next command will make almost the entire tree. The -m 770 option will add full directory permissions to owner and group users.
-
-```bash
-mkdir -m 770 -p OCT22_RNA_seq/rRNA_filtering/{filtered_fastqs,STAR_alignment,HISAT2_alignment}
-```
-
-To make scripts look cleaner it is useful to link files that are stored else where into the project analysis directory.
-This is called a symbolic link. To link to the fastp_trimmed directory that contains the trimmed fastq files received 
-from the sequencing centre use this command. Change the directory names as required. I ran this from the Research_Project-T110796 directory.
-
-```bash
-ln -s /lustre/projects/Research_Project-T110796/Project_10762/V0268/11_fastp_trimmed/ /lustre/projects/Research_Project-T110796/Project_10762/ages_alignments/fastqs
-
-/lustre/projects/Research_Project-T110796/Project_10762/ages_alignments
-
-``` 
-
-The reference genome for *Pristionchus pacificus* should already be in the el_paco_ref directory. If a new version is released upload them
+The reference genome for *Pristionchus pacificus* should already be in the el_paco directory. If a new version is released upload them
 into this directory. You will then need to index the new version for HISAT2 or STAR using the scripts provided.
 
 
 
-### Downloading Scripts 
+### Downloading Scripts (needs updating)
 To obtain the scripts from the GitHub repository first move to diff_expr_scripts/ then load the git module and use the following command.
 
 ```bash
@@ -79,128 +57,53 @@ git pull origin  # should download updated scripts if needed
 
 
 
-Once you have made the directory tree and linked the fastq directory, it should look something like this.
-'*' is the symbolically linked directory
+Set up the directories to look like this.
 
 ```bash
 cd /lustre/projects/Research_Project-T110796/Project_10762
 |
-└── Project_10762/
-    ├── V0268/
-    │   ├── 01_raw_reads
-    │   ├── 09_QC_reports
-    │   └── 11_fastp_trimmed
+└── nf_10762/
+    ├── ages_nf/
+    │   ├── samplesheet.csv
+    │   └── ages_nf_jobs.sh
     |
-    ├── ages_alignments/
-    │   ├── fastqs
-    |   ├── sorted_bams
-    │   └── rRNA_filtering/
-    │       ├── filtered_fastqs
-    │       ├── STAR_alignment
-    │       └── HISAT2_alignment
+    ├── dr_nf/
+    │   ├── samplesheet.csv
+    |   ├── dr_nf_jobs.sh
+    │   └── 
     |
-    ├── nys2h_alignments/
-    │   ├── fastqs
-    │   └── rRNA_filtering/
-    │       ├── filtered_fastqs
-    │       ├── STAR_alignment
-    │       └── HISAT2_alignment
+    ├── nys_nf/
+    │   ├── samplesheet.csv
+    │   └── nys_nf_jobs.sh
     |
-    ├── dr_alignments/
-    │   ├── fastqs
-    │   └── rRNA_filtering/
-    │       ├── filtered_fastqs
-    │       ├── STAR_alignment
-    │       └── HISAT2_alignment
+    ├── el_paco/
+    │   ├── El_Paco_genome_V3.gtf
+    │   └── El_Paco_genome_V3.fa
     |
-    ├── el_paco_ref/
-    |   └── el_paco_ref/
-    │       ├── El_Paco_V3_gene_annotations.gff3
-    │       ├── El_Paco_genome.fa 
-    │       ├── El_Paco_V3_gene_annotations.gtf 
-    │       ├── STAR_Index
-    │       └── HISAT_Index
+    ├── fastqs/
+    │   ├── negativecontrol.fastq.gz
+    │   ├── sample1.fastq.gz
+    │   ├── sample2.fastq.gz
+    │   └── Etc...      
     |
-    └── diff_expr_scripts/
-        └── here be scripts...
+    └── generate_samplesheet.sh 
+
+
 ```
 
 ## Script Usage
 
 Check each script and change the #SBATCH parameters and other lines as necessary.
 
---- Creating Index files for alignments ---
+In the directory of each study, run the job script, e.g., 
 
 ```bash
-sbatch hisat-indexing-job.sh
-sbatch star-indexing-job.sh
-```
-This only needs to be done once for each reference genome, reuse the index for each alignment.
-
---- Create the rRNA index ---
-
-```bash
-cd /lustre/projects/Research_Project-T110796/Project_10762/el_paco_ref/el_paco_ref/
-
-module load BWA/0.7.17-foss-2018a
-module load SAMtools/1.7-foss-2018a
-
-bwa index rRNA-reference.fasta
+cd dr_nf/
+sbatch dr_nf_jobs.sh
 ```
 
---- Aligning rRNA reads ---
+Nextflow will filter rRNA reads and generate aligned bam files.
 
-Create absolute symbolic link from diff_expr scripts in filtered_fastqs to run script in this directory
-
-```bash
-ln -s /lustre/projects/Research_Project-T110796/Project_10762/diff_expr_scripts/bwa-rRNA-job-script.sh rRNA-filtering.sh
-```
-Generate SAM files and gzip. In the job creation loop check that all file paths are correct. If in doubt use absolute path.
-
-```bash
-sh generate-bwa-rRNA-commands-SAM.sh
-sbatch bwa-rRNA-job-script-SAM.sh
-```
-
-Generate BAM file.
-
-```bash
-sh generate-bwa-rRNA-commands-BAM.sh
-sbatch bwa-rRNA-job-script-BAM.sh
-```
-
-
-
-
---- Converting non-rRNA bams to fastqs ---
-
-Sort .bam files
-
-```bash
-sh generate-sortedbams-commands.sh
-sbatch sortedbams-job-script.sh
-```
-
-Subset R1 and R2 into seperate fasta files
-
-```bash
-sh generate-sortedbam_commands.sh
-sbatch sortedbam_commands.sh
-```
-
---- Align filtered reads to genome with HISAT2 ---
-
-```bash
-sh generate-hisat2-commands.sh
-sbatch hisat2-job-script.sh
-```
-
---- Align filered reads to genome with STAR ---
-
-```bash
-sh generate-star-commands.sh
-sbatch star-job-script.sh
-```
 
 --- featureCounts and DESeq2 in RStudio ---
 
@@ -208,16 +111,17 @@ sbatch star-job-script.sh
 deseq2-edgeR-protocol.R
 ```
 
-To use this R script you will need to download your HISAT2/STAR aligned bam files and the gtf annotation file and place them into your working directory for RStudio.
-Then load this script and work through each step. Modifying the script to your needs. 
+To use this R script you will need to download your HISAT2 aligned bam files and the gtf annotation file and place them into your working directory for RStudio.
+
+Then load this script and work through each step, modifying the script to your needs. 
 
 ## Contributing
 
-Harry Pollitt (author)
+Harry Pollitt
 
 Email: hap39@aber.ac.uk
 
-Rebekah White (October 2022 updates)
+Rebekah White
 
 Email: rw617@exeter.ac.uk
 
