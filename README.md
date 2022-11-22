@@ -46,7 +46,8 @@ into this directory. You will then need to index the new version for HISAT2 or S
 
 
 
-### Downloading Scripts (needs updating)
+### Downloading Scripts 
+(needs updating)
 To obtain the scripts from the GitHub repository first move to diff_expr_scripts/ then load the git module and use the following command.
 
 ```bash
@@ -60,7 +61,7 @@ git pull origin  # should download updated scripts if needed
 Set up the directories to look like this.
 
 ```bash
-cd /lustre/projects/Research_Project-T110796/Project_10762
+cd /lustre/projects/Research_Project-T110796/
 |
 └── nf_10762/
     ├── ages_nf/
@@ -69,8 +70,7 @@ cd /lustre/projects/Research_Project-T110796/Project_10762
     |
     ├── dr_nf/
     │   ├── samplesheet.csv
-    |   ├── dr_nf_jobs.sh
-    │   └── 
+    |   └── dr_nf_jobs.sh
     |
     ├── nys_nf/
     │   ├── samplesheet.csv
