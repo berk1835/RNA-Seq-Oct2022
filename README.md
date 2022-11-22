@@ -134,4 +134,7 @@ Email: c.weadick@exeter.ac.uk
 The authors would like to acknowledge the use of the University of Exeter High-Performance Computing (HPC) facility in
 in carrying out this work.
 
-Ewels, P.A., Peltzer, A., Fillinger, S. et al. The nf-core framework for community-curated bioinformatics pipelines. Nat Biotechnol 38, 276–278 (2020).
+
+## References
+
+Ewels, P.A., Peltzer, A., Fillinger, S. et al. (2020) The nf-core framework for community-curated bioinformatics pipelines. *Nature Biotechnology* 38, 276–278.
