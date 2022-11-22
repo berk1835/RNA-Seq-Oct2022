@@ -137,4 +137,8 @@ in carrying out this work.
 
 ## References
 
-Ewels, P.A., Peltzer, A., Fillinger, S. et al. (2020) The nf-core framework for community-curated bioinformatics pipelines. *Nature Biotechnology* 38, 276–278.
+Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C (2017) Nextflow enables reproducible computational workflows. *Nature Biotechnology* 35(4):316-319.
+
+Ewels PA, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tommaso P, Nahnsen S (2020) The nf-core framework for community-curated bioinformatics pipelines. *Nature Biotechnology* 38: 276–278.
+
+See pipeline tool citations here: https://github.com/nf-core/rnaseq/blob/master/CITATIONS.md
