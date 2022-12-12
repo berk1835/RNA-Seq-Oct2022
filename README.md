@@ -115,6 +115,14 @@ To use this R script you will need to download your HISAT2 aligned bam files and
 
 Then load this script and work through each step, modifying the script to your needs. 
 
+Using your list of DEGs generated, find Ppa-specific functions using
+
+```bash
+degs_align_with_Sun.R
+```
+
+
+
 ## Contributing
 
 Harry Pollitt
