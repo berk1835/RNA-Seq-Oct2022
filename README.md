@@ -120,6 +120,12 @@ Using your list of DEGs generated, find Ppa-specific functions using
 ```bash
 degs_align_with_Sun.R
 ```
+Then to get a summary of DEG biotypes
+
+
+```bash
+biotype_chart_dr.R
+```
 
 
 
